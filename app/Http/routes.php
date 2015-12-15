@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 get('admin', function () {
-  return redirect('/admin/dashboard');
+  return redirect('admin/dashboard');
 });
 
 $router->group([
@@ -24,6 +24,7 @@ $router->group([
   'middleware' => 'auth',
 ], function () {
   resource('admin/dashboard', 'DashboardController');
+  resource('admin/users', 'UsersController');
 
 });
 

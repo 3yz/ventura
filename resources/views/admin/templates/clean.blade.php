@@ -10,11 +10,11 @@
 
     <title>{{ config('blog.title') }} Admin</title>
 
-    <link href="{!! asset('admin/css/bootstrap.min.css') !!}" rel="stylesheet">
-    <link href="{!! asset('admin/fonts/css/font-awesome.min.css') !!}" rel="stylesheet">
-    <link href="{!! asset('admin/css/animate.min.css') !!}" rel="stylesheet">
-    <link href="{!! asset('admin/css/custom.css') !!}" rel="stylesheet">
-    <link href="{!! asset('admin/css/icheck/flat/green.css') !!}" rel="stylesheet">
+    <link href="{!! asset('manager/css/bootstrap.min.css') !!}" rel="stylesheet">
+    <link href="{!! asset('manager/fonts/css/font-awesome.min.css') !!}" rel="stylesheet">
+    <link href="{!! asset('manager/css/animate.min.css') !!}" rel="stylesheet">
+    <link href="{!! asset('manager/css/custom.css') !!}" rel="stylesheet">
+    <link href="{!! asset('manager/css/icheck/flat/green.css') !!}" rel="stylesheet">
 
     @yield('styles')
 
@@ -30,7 +30,7 @@
         <![endif]-->
 
 </head>
-<body style="background-image: url('{!! asset('admin/images/bg-login-3yz.jpg') !!}');">
+<body style="background-image: url('{!! asset('manager/images/bg-login-3yz.jpg') !!}');">
 
     <div class="">
         <a class="hiddenanchor" id="toregister"></a>
