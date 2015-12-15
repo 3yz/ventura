@@ -23,8 +23,8 @@ $router->group([
   'namespace' => 'Admin',
   'middleware' => 'auth',
 ], function () {
-  resource('admin/dashboard', 'DashboardController');
-  resource('admin/users', 'UsersController');
+  resource('admin/dashboard', 'Dashboard');
+  resource('admin/users', 'Users');
 
 });
 
@@ -32,9 +32,9 @@ $router->group([
 
 
 // Logging in and out
-get('/auth/login', 'Auth\AuthController@getLogin');
-post('/auth/login', 'Auth\AuthController@postLogin');
+get('/auth/login', 'Auth\Auth@getLogin');
+post('/auth/login', 'Auth\Auth@postLogin');
 get('/auth/logout', [
-  'uses' => 'Auth\AuthController@getLogout',
+  'uses' => 'Auth\Auth@getLogout',
   'as' => 'admin.logout'
 ]);

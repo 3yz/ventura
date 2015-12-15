@@ -8,7 +8,7 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class UsersController extends Controller
+class Users extends Controller
 {
     /**
      * Display a listing of the resource.
