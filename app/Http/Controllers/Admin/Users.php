@@ -55,7 +55,6 @@ class Users extends Controller
 
             return response()->json($response);
         } else {
-            // $users = \App\User::all();
             return view('admin.users.index', ['cols' => $columns]);
         }
     }
