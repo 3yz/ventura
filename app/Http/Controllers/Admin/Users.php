@@ -10,6 +10,12 @@ use App\Http\Controllers\Controller;
 
 class Users extends Controller
 {
+
+    public function __construct()
+    {
+      $this->middleware('check.admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +23,7 @@ class Users extends Controller
      */
     public function index()
     {
-        $columns = ['id', 'name', 'email', 'created_at', 'updated_at'];
+        $columns = ['id', 'name', 'email', 'role', 'created_at', 'updated_at'];
 
         if(\Illuminate\Support\Facades\Request::ajax()) {
 
@@ -45,6 +51,7 @@ class Users extends Controller
                 $user->id,
                 $user->name,
                 $user->email,
+                $user->role,
                 $user->created_at,
                 $user->updated_at,
                 '<a href="'.route('admin.users.show', $user->id).'" title="Visualizar" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> visualizar</a>
@@ -79,7 +86,8 @@ class Users extends Controller
     {
          $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|unique:users',
+            'email' => 'required|email|unique:users',
+            'role' => 'required|in:admin,manager,user',
             'password' => 'required|min:8',
             'confirm_password' => 'required|same:password',
         ]);
@@ -131,6 +139,7 @@ class Users extends Controller
 
         $validation = [
             'name' => 'required',
+            'role' => 'required|in:admin,manager,user',
             'email' => 'required|unique:users,email,' . $user->id,
         ];
         if($request->get('password') != '') {

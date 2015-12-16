@@ -86,7 +86,7 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li><a href="javascript:;">  Profile</a></li>
+                                    {{-- <li><a href="javascript:;">  Profile</a></li> --}}
                                     <li><a href="{{ route('admin.logout') }}"><i class="fa fa-sign-out pull-right"></i> Sair</a></li>
                                 </ul>
                             </li>

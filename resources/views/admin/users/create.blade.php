@@ -39,6 +39,12 @@
                             </div>
                         </div>
                         <div class="item form-group">
+                            {!! Form::label('role', 'Perfil:', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                {!! Form::select('role', ['admin' => 'admin', 'manager' => 'manager', 'user' => 'user'], null, ['class' => 'form-control', 'required' => 'required', 'class' => 'form-control col-md-7 col-xs-12']) !!}
+                            </div>
+                        </div>
+                        <div class="item form-group">
                             {!! Form::label('password', 'Senha:', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 {!! Form::password('password', ['class' => 'form-control', 'required' => 'required', 'class' => 'form-control col-md-7 col-xs-12']) !!}

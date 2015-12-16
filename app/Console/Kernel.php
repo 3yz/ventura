@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\Admin\Migration::class,
         \App\Console\Commands\Admin\Controller::class,
         \App\Console\Commands\Admin\Generate::class,
+        \App\Console\Commands\Admin\AddUser::class,
     ];
 
     /**

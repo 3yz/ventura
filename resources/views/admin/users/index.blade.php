@@ -35,6 +35,7 @@
                                 <th>ID</th>
                                 <th>Nome</th>
                                 <th>E-mail</th>
+                                <th>Perfil</th>
                                 <th>Criado</th>
                                 <th>Atualizado</th>
                                 <th>

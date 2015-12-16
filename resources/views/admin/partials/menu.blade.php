@@ -3,7 +3,9 @@
         <h3>Menu</h3>
         <ul class="nav side-menu">
             <li><a href="{{ route('admin.dashboard.index') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+            @if(Auth::user()->role == 'admin')
             <li><a href="{{ route('admin.users.index') }}"><i class="fa fa-users"></i> Usuários</a></li>
+            @endif
             <!--newItens-->
         </ul>
     </div>
