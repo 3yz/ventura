@@ -73,27 +73,27 @@ class Generate extends Command
 
             $requiredFields = ($requiredFieldsStr != '') ? "[" . $requiredFieldsStr . "]" : '';
 
-            // $this->call('admin:controller', ['name' => $controllerNamespace . $name . 'Controller', '--crud-name' => $name, '--view-path' => $viewPath, '--fields' => $commaSeparetedString, '--required-fields' => $requiredFields]);
-            //$this->call('admin:model', ['name' => $name, '--fillable' => $fillable, '--table' => str_plural(strtolower($name))]);
-            //$this->call('admin:migration', ['name' => str_plural(strtolower($name)), '--schema' => $fields, '--pk' => $primaryKey]);
+            $this->call('admin:controller', ['name' => $controllerNamespace . str_plural($name) , '--crud-name' => $name, '--view-path' => $viewPath, '--fields' => $commaSeparetedString, '--required-fields' => $requiredFields]);
+            $this->call('admin:model', ['name' => $name, '--fillable' => $fillable, '--table' => str_plural(strtolower($name))]);
+            $this->call('admin:migration', ['name' => str_plural(strtolower($name)), '--schema' => $fields, '--pk' => $primaryKey]);
             $this->call('admin:view', ['name' => $name, '--fields' => $fields, '--view-path' => $viewPath]);
         } else {
             $this->call('make:controller', ['name' => $controllerNamespace . $name . 'Controller']);
             $this->call('make:model', ['name' => $name]);
         }
 
-        // // Updating the Http/routes.php file
-        // $routeFile = app_path('Http/routes.php');
-        // if (file_exists($routeFile) && (strtolower($this->option('route')) === 'yes')) {
-        //     $controller = ($controllerNamespace != '') ? $controllerNamespace . '\\' . $name . 'Controller' : $name . 'Controller';
+        // Updating the Http/routes.php file
+        $routeFile = app_path('Http/routesAdmin.php');
+        if (file_exists($routeFile) && (strtolower($this->option('route')) === 'yes')) {
+            $controller = 'admin/' . str_plural(strtolower($name));
 
-        //     $isAdded = File::append($routeFile, "\nRoute::resource('" . strtolower($name) . "', '" . $controller . "');");
-        //     if ($isAdded) {
-        //         $this->info('Crud/Resource route added to ' . $routeFile);
-        //     } else {
-        //         $this->info('Unable to add the route to ' . $routeFile);
-        //     }
-        // }
+            $isAdded = File::append($routeFile, "\nresource('" . $controller . "', '" . str_plural($name) . "');");
+            if ($isAdded) {
+                $this->info('Crud/Resource route added to ' . $routeFile);
+            } else {
+                $this->info('Unable to add the route to ' . $routeFile);
+            }
+        }
     }
 
 }

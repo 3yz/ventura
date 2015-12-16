@@ -28,8 +28,8 @@
                             {{ Session::get('info') }}
                         </div>
                     @endif
-                    <a href="{{ route('%%crudName%%.create') }}" class="btn btn-primary">Adicionar novo</a>
-                    <table class="table table-striped responsive-utilities jambo_table" data-source="{{ route('%%crudName%%.index') }}">
+                    <a href="{{ route('%%viewPath%%%%crudNamePlural%%.create') }}" class="btn btn-primary">Adicionar novo</a>
+                    <table class="table table-striped responsive-utilities jambo_table" data-source="{{ route('%%viewPath%%%%crudNamePlural%%.index') }}">
                         <thead>
                             <tr class="headings">
                                 %%formHeadingHtml%%

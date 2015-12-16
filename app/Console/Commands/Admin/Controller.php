@@ -115,7 +115,7 @@ class Controller extends GeneratorCommand
         $fields = str_replace("'", '', $fields);
         $fields = explode(',', $fields);
 
-        $str = '';
+        $str = '$' . $crudName . '->id, ';
         foreach($fields as $field) {
           $str .= '$' . $crudName . '->' . trim($field) . ', ';
         }

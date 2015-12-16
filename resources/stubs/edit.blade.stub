@@ -1,31 +1,49 @@
-@extends('layouts.master')
+@extends('admin.templates.layout')
 
 @section('content')
+<div class="page-title">
+    <div class="title_left">
+        <h3>%%crudNamePluralCap%%</h3>
+    </div>
+</div>
+<div class="clearfix"></div>
 
-    <h1>Edit %%crudNameSingularCap%%</h1>
-    <hr/>
+<div class="row">
 
-    {!! Form::model($%%crudNameSingular%%, [
-        'method' => 'PATCH',
-        'route' => ['%%crudName%%.update', $%%crudNameSingular%%->id],
-        'class' => 'form-horizontal'
-    ]) !!}
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><i class="fa fa-edit"></i> Editar registro</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <section>
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
+                    {!! Form::model($%%crudNameSingular%%, ['route' => ['%%viewPath%%%%crudNamePlural%%.update', $%%crudNameSingular%%->id], 'method' => 'PATCH', 'class' => 'form-horizontal form-label-left', 'data-parsley-validate' => '']) !!}
+                        %%formFieldsHtml%%
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <a href="{{ route('%%viewPath%%%%crudNamePlural%%.index') }}" class="btn btn-primary">Cancelar</a>
+                                {!! Form::submit('Atualizar', ['class' => 'btn btn-success']) !!}
+                            </div>
+                        </div>
 
-    %%formFieldsHtml%%
-
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-3">
-            {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+                    {!! Form::close() !!}
+                </section>
+            </div>
         </div>
     </div>
-    {!! Form::close() !!}
-
-    @if ($errors->any())
-        <ul class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
-
-@endsection
+</div>
+@section('scripts')
+<script type="text/javascript">
+  window.Parsley.setLocale('pt-br');
+</script>
+@stop
+@stop

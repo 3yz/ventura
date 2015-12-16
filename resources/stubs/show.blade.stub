@@ -1,21 +1,37 @@
-@extends('layouts.master')
+@extends('admin.templates.layout')
 
 @section('content')
-
-    <h1>%%crudNameSingularCap%%</h1>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>ID.</th> %%formHeadingHtml%%
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ $%%crudNameSingular%%->id }}</td> %%formBodyHtml%%
-                </tr>
-            </tbody>    
-        </table>
+<div class="page-title">
+    <div class="title_left">
+        <h3>%%crudNamePluralCap%%</h3>
     </div>
+</div>
+<div class="clearfix"></div>
 
-@endsection
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><i class="fa fa-search"></i> Visualizar registro</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <section>
+                    <dl>
+                      <dt>ID</dt>
+                      <dd>{{ $%%crudNameSingular%%->id }}</dd>
+                      %%formBodyHtml%%
+                    </dl>
+                    <div class="ln_solid"></div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <a href="{{ route('%%viewPath%%%%crudNamePlural%%.index') }}" class="btn btn-primary">voltar</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+@section('scripts')
+@stop
+@stop

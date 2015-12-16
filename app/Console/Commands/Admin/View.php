@@ -2,7 +2,8 @@
 
 namespace App\Console\Commands\Admin;
 
-use Illuminate\Console\GeneratorCommand;
+use File;
+use Illuminate\Console\Command;
 
 class View extends Command
 {
@@ -62,6 +63,7 @@ class View extends Command
      */
     public function handle()
     {
+        $viewPath = $this->option('view-path') ? strtolower($this->option('view-path')) . '.' : '';
         $crudName = strtolower($this->argument('name'));
         $crudNameCap = ucwords($crudName);
         $crudNameSingular = str_singular($crudName);
@@ -72,9 +74,9 @@ class View extends Command
         $viewDirectory = base_path('resources/views/');
         if ($this->option('view-path')) {
             $userPath = $this->option('view-path');
-            $path = $viewDirectory . $userPath . '/' . $crudName . '/';
+            $path = $viewDirectory . $userPath . '/' . $crudNamePlural . '/';
         } else {
-            $path = $viewDirectory . $crudName . '/';
+            $path = $viewDirectory . $crudNamePlural . '/';
         }
 
         if (!File::isDirectory($path)) {
@@ -84,7 +86,7 @@ class View extends Command
         $fields = $this->option('fields');
         $fieldsArray = explode(',', $fields);
 
-        $formFields = array();
+        $formFields = [];
         $x = 0;
         foreach ($fieldsArray as $item) {
             $itemArray = explode(':', $item);
@@ -101,38 +103,39 @@ class View extends Command
         }
 
         // Form fields and label
-        $formHeadingHtml = '';
+        $formHeadingHtml = '<th>ID</th>';
         $formBodyHtml = '';
         $formBodyHtmlForShowView = '';
 
         $i = 0;
         foreach ($formFields as $key => $value) {
-            if ($i == 3) {
-                break;
-            }
+            // if ($i == 3) {
+            //     break;
+            // }
 
             $field = $value['name'];
             $label = ucwords(str_replace('_', ' ', $field));
             $formHeadingHtml .= '<th>' . $label . '</th>';
 
-            if ($i == 0) {
-                $formBodyHtml .= '<td><a href="{{ url(\'/%%crudName%%\', $item->id) }}">{{ $item->' . $field . ' }}</a></td>';
-            } else {
-                $formBodyHtml .= '<td>{{ $item->' . $field . ' }}</td>';
-            }
-            $formBodyHtmlForShowView .= '<td> {{ $%%crudNameSingular%%->' . $field . ' }} </td>';
+            // if ($i == 0) {
+            //     $formBodyHtml .= '<td><a href="{{ url(\'/%%crudName%%\', $item->id) }}">{{ $item->' . $field . ' }}</a></td>';
+            // } else {
+            //     $formBodyHtml .= '<td>{{ $item->' . $field . ' }}</td>';
+            // }
+            $formBodyHtmlForShowView .= '<dt>'.$label.'</dt><dd> {{ $%%crudNameSingular%%->' . $field . ' }} </dd>';
 
             $i++;
         }
 
         // For index.blade.php file
-        $indexFile = __DIR__ . '/../stubs/index.blade.stub';
+        $indexFile = base_path(). '/resources/stubs/index.blade.stub';
         $newIndexFile = $path . 'index.blade.php';
         if (!File::copy($indexFile, $newIndexFile)) {
             echo "failed to copy $indexFile...\n";
         } else {
             File::put($newIndexFile, str_replace('%%formHeadingHtml%%', $formHeadingHtml, File::get($newIndexFile)));
             File::put($newIndexFile, str_replace('%%formBodyHtml%%', $formBodyHtml, File::get($newIndexFile)));
+            File::put($newIndexFile, str_replace('%%viewPath%%', $viewPath, File::get($newIndexFile)));
             File::put($newIndexFile, str_replace('%%crudName%%', $crudName, File::get($newIndexFile)));
             File::put($newIndexFile, str_replace('%%crudNameCap%%', $crudNameCap, File::get($newIndexFile)));
             File::put($newIndexFile, str_replace('%%crudNamePlural%%', $crudNamePlural, File::get($newIndexFile)));
@@ -140,54 +143,48 @@ class View extends Command
         }
 
         // For create.blade.php file
-        $createFile = __DIR__ . '/../stubs/create.blade.stub';
+        $createFile = base_path(). '/resources/stubs/create.blade.stub';
         $newCreateFile = $path . 'create.blade.php';
         if (!File::copy($createFile, $newCreateFile)) {
             echo "failed to copy $createFile...\n";
         } else {
+            File::put($newCreateFile, str_replace('%%viewPath%%', $viewPath, File::get($newCreateFile)));
             File::put($newCreateFile, str_replace('%%crudName%%', $crudName, File::get($newCreateFile)));
             File::put($newCreateFile, str_replace('%%crudNameSingularCap%%', $crudNameSingularCap, File::get($newCreateFile)));
             File::put($newCreateFile, str_replace('%%formFieldsHtml%%', $formFieldsHtml, File::get($newCreateFile)));
+            File::put($newCreateFile, str_replace('%%crudNamePlural%%', $crudNamePlural, File::get($newCreateFile)));
+            File::put($newCreateFile, str_replace('%%crudNamePluralCap%%', $crudNamePluralCap, File::get($newCreateFile)));
         }
 
         // For edit.blade.php file
-        $editFile = __DIR__ . '/../stubs/edit.blade.stub';
+        $editFile = base_path(). '/resources/stubs/edit.blade.stub';
         $newEditFile = $path . 'edit.blade.php';
         if (!File::copy($editFile, $newEditFile)) {
             echo "failed to copy $editFile...\n";
         } else {
+            File::put($newEditFile, str_replace('%%viewPath%%', $viewPath, File::get($newEditFile)));
             File::put($newEditFile, str_replace('%%crudName%%', $crudName, File::get($newEditFile)));
             File::put($newEditFile, str_replace('%%crudNameSingular%%', $crudNameSingular, File::get($newEditFile)));
             File::put($newEditFile, str_replace('%%crudNameSingularCap%%', $crudNameSingularCap, File::get($newEditFile)));
             File::put($newEditFile, str_replace('%%formFieldsHtml%%', $formFieldsHtml, File::get($newEditFile)));
+            File::put($newEditFile, str_replace('%%crudNamePlural%%', $crudNamePlural, File::get($newEditFile)));
+            File::put($newEditFile, str_replace('%%crudNamePluralCap%%', $crudNamePluralCap, File::get($newEditFile)));
         }
 
         // For show.blade.php file
-        $showFile = __DIR__ . '/../stubs/show.blade.stub';
+        $showFile = base_path(). '/resources/stubs/show.blade.stub';
         $newShowFile = $path . 'show.blade.php';
         if (!File::copy($showFile, $newShowFile)) {
             echo "failed to copy $showFile...\n";
         } else {
+            File::put($newShowFile, str_replace('%%viewPath%%', $viewPath, File::get($newShowFile)));
             File::put($newShowFile, str_replace('%%formHeadingHtml%%', $formHeadingHtml, File::get($newShowFile)));
             File::put($newShowFile, str_replace('%%formBodyHtml%%', $formBodyHtmlForShowView, File::get($newShowFile)));
             File::put($newShowFile, str_replace('%%crudNameSingular%%', $crudNameSingular, File::get($newShowFile)));
             File::put($newShowFile, str_replace('%%crudNameSingularCap%%', $crudNameSingularCap, File::get($newShowFile)));
+            File::put($newShowFile, str_replace('%%crudNamePlural%%', $crudNamePlural, File::get($newShowFile)));
+            File::put($newShowFile, str_replace('%%crudNamePluralCap%%', $crudNamePluralCap, File::get($newShowFile)));
         }
-
-        // For layouts/master.blade.php file
-        // $layoutsDirPath = base_path('resources/views/layouts/');
-        // if (!File::isDirectory($layoutsDirPath)) {
-        //     File::makeDirectory($layoutsDirPath);
-        // }
-
-        // $layoutsFile = __DIR__ . '/../stubs/master.blade.stub';
-        // $newLayoutsFile = $layoutsDirPath . 'master.blade.php';
-
-        // if (!File::exists($newLayoutsFile)) {
-        //     if (!File::copy($layoutsFile, $newLayoutsFile)) {
-        //         echo "failed to copy $layoutsFile...\n";
-        //     }
-        // }
 
         $this->info('View created successfully.');
     }
@@ -204,13 +201,13 @@ class View extends Command
     {
         $formGroup =
             <<<EOD
-            <div class="form-group {{ \$errors->has('%1\$s') ? 'has-error' : ''}}">
-                {!! Form::label('%1\$s', '%2\$s: ', ['class' => 'col-sm-3 control-label']) !!}
-                <div class="col-sm-6">
-                    %3\$s
-                    {!! \$errors->first('%1\$s', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>\n
+
+                        <div class="item form-group {{ \$errors->has('%1\$s') ? 'has-error' : ''}}">
+                            {!! Form::label('%1\$s', '%2\$s: ', ['class' => 'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                %3\$s
+                            </div>
+                        </div>\n
 EOD;
 
         return sprintf($formGroup, $item['name'], ucwords(strtolower(str_replace('_', ' ', $item['name']))), $field);
@@ -254,7 +251,7 @@ EOD;
 
         return $this->wrapField(
             $item,
-            "{!! Form::" . $this->typeLookup[$item['type']] . "('" . $item['name'] . "', null, ['class' => 'form-control'$required]) !!}"
+            "{!! Form::" . $this->typeLookup[$item['type']] . "('" . $item['name'] . "', null, ['class' => 'form-control col-md-7 col-xs-12'$required]) !!}"
         );
     }
 
@@ -271,7 +268,7 @@ EOD;
 
         return $this->wrapField(
             $item,
-            "{!! Form::password('" . $item['name'] . "', ['class' => 'form-control'$required]) !!}"
+            "{!! Form::password('" . $item['name'] . "', ['class' => 'form-control col-md-7 col-xs-12'$required]) !!}"
         );
     }
 
@@ -288,7 +285,7 @@ EOD;
 
         return $this->wrapField(
             $item,
-            "{!! Form::input('" . $this->typeLookup[$item['type']] . "', '" . $item['name'] . "', null, ['class' => 'form-control'$required]) !!}"
+            "{!! Form::input('" . $this->typeLookup[$item['type']] . "', '" . $item['name'] . "', null, ['class' => 'form-control col-md-7 col-xs-12'$required]) !!}"
         );
     }
 

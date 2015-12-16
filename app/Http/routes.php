@@ -23,9 +23,7 @@ $router->group([
   'namespace' => 'Admin',
   'middleware' => 'auth',
 ], function () {
-  resource('admin/dashboard', 'Dashboard');
-  resource('admin/users', 'Users');
-
+  include 'routesAdmin.php';
 });
 
 // Admin area
