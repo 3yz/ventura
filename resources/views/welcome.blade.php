@@ -3,7 +3,7 @@
     <head>
         <title>Laravel</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,700|Raleway:200" rel="stylesheet" type="text/css">
 
         <style>
             html, body {
@@ -16,7 +16,7 @@
                 width: 100%;
                 display: table;
                 font-weight: 100;
-                font-family: 'Lato';
+                font-family: 'Ubuntu';
             }
 
             .container {
@@ -28,17 +28,25 @@
             .content {
                 text-align: center;
                 display: inline-block;
+                width: 100%;
             }
 
             .title {
-                font-size: 96px;
+                font-size: 8vw;
+            }
+            .title small {
+              font-size: 0.5em;
+            }
+            img {
+              width: 25%;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <img src="http://3yz.com/img/logo.svg" alt="">
+                <div class="title">3yz bootstrap<br><small>(a.k.a. Ventura)</small></div>
             </div>
         </div>
     </body>
