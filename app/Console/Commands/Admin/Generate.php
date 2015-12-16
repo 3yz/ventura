@@ -94,6 +94,18 @@ class Generate extends Command
                 $this->info('Unable to add the route to ' . $routeFile);
             }
         }
+        // Updating the resources/views/admin/templates/menu.blade.php file
+        $menuFile = base_path() . '/resources/views/admin/partials/menu.blade.php';
+        if (file_exists($menuFile)) {
+            $controller = 'admin/' . str_plural(strtolower($name));
+
+            $file = File::get($menuFile);
+            $str = "<li><a href=\"{{ route('admin.users.index') }}\"><i class=\"fa fa-wrench\"></i> ". str_plural($name)."</a></li>
+            <!--newItens-->";
+            $str = str_replace('<!--newItens-->', $str, $file);
+            File::put($menuFile, $str);
+            $this->info($name . 'added added to ' . $menuFile);
+        }
     }
 
 }

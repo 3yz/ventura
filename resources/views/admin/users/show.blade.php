@@ -38,8 +38,5 @@
     </div>
 </div>
 @section('scripts')
-<script type="text/javascript">
-  window.Parsley.setLocale('pt-br');
-</script>
 @stop
 @stop

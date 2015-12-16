@@ -43,21 +43,6 @@
                             </tr>
                         </thead>
 
-                        {{-- <tbody>
-                            @foreach($users as $user)
-                            <tr class="even pointer">
-                                <td class=" ">{{ $user->id }}</td>
-                                <td class=" ">{{ $user->name }}</td>
-                                <td class=" ">{{ $user->email }}</td>
-                                <td class=" last">
-                                    <a href="#" title="Editar" class="btn btn-default btn-sm"><span class="fa fa-edit" aria-hidden="true"></span></a>
-                                    <a href="#" title="Visualizar" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
-                                    <a href="#" title="Remover" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody> --}}
-
                     </table>
                 </section>
             </div>
