@@ -20,9 +20,42 @@ class DummyClass extends Controller
      */
     public function index()
     {
-        ${{crudNamePlural}} = {{crudNameCap}}::paginate(15);
 
-        return view('{{viewPath}}{{crudName}}.index', compact('{{crudNamePlural}}'));
+        $columns = ['id', '{{fields}}'];
+
+        if(\Illuminate\Support\Facades\Request::ajax()) {
+            //search MUST BE DEVELOPED
+            $query = DB::table('{{crudNamePlural}}')
+              ->skip(\Input::get('start'))
+              ->take(\Input::get('length'));
+
+            if ($order = \Input::get('order'))
+            {
+                $query->orderBy($columns[$order[0]['column']], $order[0]['dir']);
+            }
+
+            ${{crudNamePlural}} = $query->get();
+
+            $total = \DB::table('{{crudNamePlural}}')->count();
+
+            $response = [];
+            $response['draw'] = \Input::get('draw');
+            $response['recordsTotal'] = $total;
+            $response['recordsFiltered'] = $total;
+            $response['data'] = [];
+            foreach(${{crudNamePlural}} as ${{crudName}}) {
+              $response['data'][] = [
+                {{modelFields}}
+                '<a href="'.route('{{viewPath}}{{crudNamePlural}}.show', ${{crudName}}->id).'" title="Visualizar" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> visualizar</a>
+                 <a href="'.route('{{viewPath}}{{crudNamePlural}}.edit', ${{crudName}}->id).'" title="Editar" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> editar</a>
+                 <a href="'.route('{{viewPath}}{{crudNamePlural}}.destroy', ${{crudName}}->id).'" title="Remover" class="btn btn-danger btn-xs btn-delete" data-token="'.csrf_token().'"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> remover</a>'
+              ];
+            }
+
+            return response()->json($response);
+        } else {
+            return view('admin.{{crudNamePlural}}.index', ['cols' => $columns]);
+        }
     }
 
 

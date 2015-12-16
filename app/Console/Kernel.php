@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\Admin\View::class,
         \App\Console\Commands\Admin\Model::class,
         \App\Console\Commands\Admin\Migration::class,
         \App\Console\Commands\Admin\Controller::class,

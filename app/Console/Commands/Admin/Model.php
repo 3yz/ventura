@@ -61,7 +61,7 @@ class Model extends GeneratorCommand
     {
         $stub = $this->files->get($this->getStub());
 
-        $table = $this->option('table') ?: str_plural(strtolower($this->argument('name')));
+        $table = $this->option('table') ?: strtolower($this->argument('name'));
         $fillable = $this->option('fillable');
 
         return $this->replaceNamespace($stub, $name)

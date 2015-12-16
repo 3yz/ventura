@@ -15,6 +15,7 @@ class Controller extends GeneratorCommand
                             {name : The name of the controler.}
                             {--crud-name= : The name of the Crud.}
                             {--view-path= : The name of the view path.}
+                            {--fields= : Model fields.}
                             {--required-fields=null : Required fields for validations.}';
 
     /**
@@ -62,6 +63,7 @@ class Controller extends GeneratorCommand
     {
         $stub = $this->files->get($this->getStub());
 
+        $fields = $this->option('fields');
         $viewPath = $this->option('view-path') ? strtolower($this->option('view-path')) . '.' : '';
         $crudName = strtolower($this->option('crud-name'));
         $crudNameCap = $this->option('crud-name');
@@ -75,6 +77,8 @@ class Controller extends GeneratorCommand
         }
 
         return $this->replaceNamespace($stub, $name)
+            ->replaceFields($stub, $fields)
+            ->replaceModelFields($stub, $crudName, $fields)
             ->replaceViewPath($stub, $viewPath)
             ->replaceCrudName($stub, $crudName)
             ->replaceCrudNameCap($stub, $crudNameCap)
@@ -83,6 +87,43 @@ class Controller extends GeneratorCommand
             ->replaceCrudNameSingular($stub, $crudNameSingular)
             ->replaceValidationRules($stub, $validationRules)
             ->replaceClass($stub, $name);
+    }
+
+    /**
+     * Replace the fields for the given stub.
+     *
+     * @param  string  $stub
+     * @return $this
+     */
+    protected function replaceFields(&$stub, $fields)
+    {
+        $stub = str_replace(
+            '{{fields}}', $fields, $stub
+        );
+
+        return $this;
+    }
+
+    /**
+     * Replace the model fields for the given stub.
+     *
+     * @param  string  $stub
+     * @return $this
+     */
+    protected function replaceModelFields(&$stub, $crudName, $fields)
+    {
+        $fields = str_replace("'", '', $fields);
+        $fields = explode(',', $fields);
+
+        $str = '';
+        foreach($fields as $field) {
+          $str .= '$' . $crudName . '->' . trim($field) . ', ';
+        }
+        $stub = str_replace(
+            '{{modelFields}}', $str, $stub
+        );
+
+        return $this;
     }
 
     /**

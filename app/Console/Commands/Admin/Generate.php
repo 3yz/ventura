@@ -17,8 +17,8 @@ class Generate extends Command
                             {--fields= : Fields name for the form & model.}
                             {--route=yes : Include Crud route to routes.php? yes|no.}
                             {--pk=id : The name of the primary key.}
-                            {--view-path= : The name of the view path.}
-                            {--namespace= : Namespace of the controller.}';
+                            {--view-path=admin : The name of the view path.}
+                            {--namespace=admin : Namespace of the controller.}';
 
     /**
      * The console command description.
@@ -73,9 +73,9 @@ class Generate extends Command
 
             $requiredFields = ($requiredFieldsStr != '') ? "[" . $requiredFieldsStr . "]" : '';
 
-            $this->call('admin:controller', ['name' => $controllerNamespace . $name . 'Controller', '--crud-name' => $name, '--view-path' => $viewPath, '--required-fields' => $requiredFields]);
-            $this->call('admin:model', ['name' => $name, '--fillable' => $fillable, '--table' => str_plural(strtolower($name))]);
-            $this->call('admin:migration', ['name' => str_plural(strtolower($name)), '--schema' => $fields, '--pk' => $primaryKey]);
+            // $this->call('admin:controller', ['name' => $controllerNamespace . $name . 'Controller', '--crud-name' => $name, '--view-path' => $viewPath, '--fields' => $commaSeparetedString, '--required-fields' => $requiredFields]);
+            //$this->call('admin:model', ['name' => $name, '--fillable' => $fillable, '--table' => str_plural(strtolower($name))]);
+            //$this->call('admin:migration', ['name' => str_plural(strtolower($name)), '--schema' => $fields, '--pk' => $primaryKey]);
             $this->call('admin:view', ['name' => $name, '--fields' => $fields, '--view-path' => $viewPath]);
         } else {
             $this->call('make:controller', ['name' => $controllerNamespace . $name . 'Controller']);
