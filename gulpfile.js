@@ -17,6 +17,7 @@ elixir(function(mix) {
 
 elixir(function(mix) {
     mix.scripts([
+        "vendor/jquery.js",
         "app.js",
         "plugins.js"
     ]);

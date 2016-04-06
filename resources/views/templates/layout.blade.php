@@ -63,7 +63,13 @@
         </style>
 
     </head>
-    <body>
+    <?php list(, $action) = explode('@', Route::getCurrentRoute()->getActionName()); ?>
+
+    <?php $currentAction = \Route::currentRouteAction();
+    list($controller, $method) = explode('@', $currentAction);
+    $controller = preg_replace('/.*\\\/', '', $controller); ?>
+
+    <body class="page-{{$action}}" id="{{ str_slug($controller) . '-' . $action }}" data-controller="{{ str_slug($controller) }}" data-action="{{ $action }}" data-root-url="{{ URL::to('/') }}">
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
