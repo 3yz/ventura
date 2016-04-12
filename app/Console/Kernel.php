@@ -13,7 +13,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\Inspire::class,
         \App\Console\Commands\Admin\View::class,
         \App\Console\Commands\Admin\Model::class,
         \App\Console\Commands\Admin\Migration::class,

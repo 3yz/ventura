@@ -21,18 +21,18 @@ class Users extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $columns = ['id', 'name', 'email', 'role', 'created_at', 'updated_at'];
 
-        if(\Illuminate\Support\Facades\Request::ajax()) {
+        if($request->ajax()) {
 
             //search MUST BE DEVELOPED
             $query = DB::table('users')
-              ->skip(\Input::get('start'))
-              ->take(\Input::get('length'));
+              ->skip($request->get('start'))
+              ->take($request->get('length'));
 
-            if ($order = \Input::get('order'))
+            if ($order = $request->get('order'))
             {
                 $query->orderBy($columns[$order[0]['column']], $order[0]['dir']);
             }
@@ -42,7 +42,7 @@ class Users extends Controller
             $total = \DB::table('users')->count();
 
             $response = [];
-            $response['draw'] = \Input::get('draw');
+            $response['draw'] = $request->get('draw');
             $response['recordsTotal'] = $total;
             $response['recordsFiltered'] = $total;
             $response['data'] = [];

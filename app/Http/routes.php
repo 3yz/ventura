@@ -13,7 +13,7 @@
 
 Route::get('/', 'Pages@index');
 
-get('admin', function () {
+Route::get('admin', function () {
   return redirect('admin/dashboard');
 });
 
@@ -28,9 +28,9 @@ $router->group([
 
 
 // Logging in and out
-get('/auth/login', 'Auth\Auth@getLogin');
-post('/auth/login', 'Auth\Auth@postLogin');
-get('/auth/logout', [
+Route::get('/auth/login', 'Auth\Auth@getLogin');
+Route::post('/auth/login', 'Auth\Auth@postLogin');
+Route::get('/auth/logout', [
   'uses' => 'Auth\Auth@getLogout',
   'as' => 'admin.logout'
 ]);

@@ -1,3 +1,3 @@
 <?php
-resource('admin/dashboard', 'Dashboard');
-resource('admin/users', 'Users');
+Route::resource('admin/dashboard', 'Dashboard');
+Route::resource('admin/users', 'Users');
