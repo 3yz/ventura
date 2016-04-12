@@ -24,44 +24,6 @@
         {!! Html::script('js/vendor/modernizr-2.6.2.min.js') !!}
 
         <link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,700|Raleway:200" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Ubuntu';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-                width: 100%;
-            }
-
-            .title {
-                font-size: 8vw;
-            }
-            .title small {
-              font-size: 0.5em;
-            }
-            img {
-              width: 25%;
-            }
-        </style>
-
     </head>
     <?php list(, $action) = explode('@', Route::getCurrentRoute()->getActionName()); ?>
 
@@ -94,5 +56,8 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create',tracking_code);ga('send','pageview');
         </script>
+        <script id="__bs_script__">//<![CDATA[
+            document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.12.1.js'><\/script>".replace("HOST", location.hostname));
+        //]]></script>
     </body>
 </html>

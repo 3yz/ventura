@@ -17,5 +17,8 @@ elixir(function(mix) {
         "app.js"
     ], 'public/js/app.js')
     .sass('app.scss')
-    .version(['css/app.css', 'js/app.js']);
+    .version(['css/app.css', 'js/app.js'])
+    .browserSync({
+      proxy: false,
+    });
 });
