@@ -4,6 +4,7 @@
     "browser-sync": "^2.7.13",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.6",
+    "laravel-elixir-browser-sync": "^1.0.0",
     "require-dir": "^0.3.0"
   },
   "dependencies": {

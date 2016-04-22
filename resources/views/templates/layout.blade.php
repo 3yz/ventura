@@ -21,7 +21,6 @@
         <!-- facebook meta -->
 
         <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
-        {!! Html::script('js/vendor/modernizr-2.6.2.min.js') !!}
 
         <link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,700|Raleway:200" rel="stylesheet" type="text/css">
     </head>
@@ -40,8 +39,7 @@
 
         {!! Html::script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') !!}
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="{{ elixir('js/app.js') }}"></script>
-        {!! Html::script('js/main.js') !!}
+        <script src="{{ elixir('js/all.js') }}"></script>
         @if (!App::environment('production'))
         {!! Html::script('js/checklist.js') !!}
         @endif
@@ -56,8 +54,5 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create',tracking_code);ga('send','pageview');
         </script>
-        <script id="__bs_script__">//<![CDATA[
-            document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.2.12.1.js'><\/script>".replace("HOST", location.hostname));
-        //]]></script>
     </body>
 </html>
