@@ -87,7 +87,7 @@ class Generate extends Command
         if (file_exists($routeFile) && (strtolower($this->option('route')) === 'yes')) {
             $controller = 'admin/' . str_plural(strtolower($name));
 
-            $isAdded = File::append($routeFile, "\nresource('" . $controller . "', '" . str_plural($name) . "');");
+            $isAdded = File::append($routeFile, "\nRoute::resource('" . $controller . "', '" . str_plural($name) . "');");
             if ($isAdded) {
                 $this->info('Crud/Resource route added to ' . $routeFile);
             } else {
