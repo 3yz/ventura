@@ -100,7 +100,7 @@ class Generate extends Command
             $controller = 'admin/' . str_plural(strtolower($name));
 
             $file = File::get($menuFile);
-            $str = "<li><a href=\"{{ route('admin.users.index') }}\"><i class=\"fa fa-wrench\"></i> ". str_plural($name)."</a></li>
+            $str = "<li><a href=\"{{ route('admin.".str_plural(strtolower($name)).".index') }}\"><i class=\"fa fa-wrench\"></i> ". str_plural($name)."</a></li>
             <!--newItens-->";
             $str = str_replace('<!--newItens-->', $str, $file);
             File::put($menuFile, $str);
