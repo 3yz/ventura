@@ -19,7 +19,7 @@ class DummyClass extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $columns = ['id', '{{fields}}'];
@@ -27,10 +27,10 @@ class DummyClass extends Controller
         if(\Illuminate\Support\Facades\Request::ajax()) {
             //search MUST BE DEVELOPED
             $query = DB::table('{{crudNamePlural}}')
-              ->skip(\Input::get('start'))
-              ->take(\Input::get('length'));
+              ->skip($request->get('start'))
+              ->take($request->get('length'));
 
-            if ($order = \Input::get('order'))
+            if ($order = $request->get('order'))
             {
                 $query->orderBy($columns[$order[0]['column']], $order[0]['dir']);
             }
@@ -40,7 +40,7 @@ class DummyClass extends Controller
             $total = DB::table('{{crudNamePlural}}')->count();
 
             $response = [];
-            $response['draw'] = \Input::get('draw');
+            $response['draw'] = $request->get('draw');
             $response['recordsTotal'] = $total;
             $response['recordsFiltered'] = $total;
             $response['data'] = [];
