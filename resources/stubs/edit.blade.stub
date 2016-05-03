@@ -25,7 +25,7 @@
                             @endforeach
                         </div>
                     @endif
-                    {!! Form::model($%%crudNameSingular%%, ['route' => ['%%viewPath%%%%crudNamePlural%%.update', $%%crudNameSingular%%->id], 'method' => 'PATCH', 'class' => 'form-horizontal form-label-left', 'data-parsley-validate' => '']) !!}
+                    {!! Form::model($%%crudNameSingular%%, ['route' => ['%%viewPath%%%%crudNamePlural%%.update', $%%crudNameSingular%%->id], 'method' => 'PATCH', 'class' => 'form-horizontal form-label-left', 'data-parsley-validate' => '', 'enctype' => 'multipart/form-data']) !!}
                         %%formFieldsHtml%%
                         <div class="ln_solid"></div>
                         <div class="form-group">

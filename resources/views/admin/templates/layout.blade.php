@@ -14,8 +14,10 @@
     <link href="{!! asset('manager/fonts/css/font-awesome.min.css') !!}" rel="stylesheet">
     <link href="{!! asset('manager/css/animate.min.css') !!}" rel="stylesheet">
     <link href="{!! asset('manager/css/icheck/flat/green.css') !!}" rel="stylesheet">
+    <link href="{!! asset('manager/css/select/select2.min.css') !!}" rel="stylesheet">
     <link href="{!! asset('manager/css/datatables/tools/css/dataTables.tableTools.css') !!}" rel="stylesheet">
     <link href="{!! asset('manager/css/sweetalert/sweetalert.css') !!}" rel="stylesheet">
+    <link href="{!! asset('manager/js/summernote/summernote.css') !!}" rel="stylesheet">
     <link href="{!! asset('manager/css/custom.css') !!}" rel="stylesheet">
 
     @yield('styles')
@@ -140,7 +142,9 @@
     <script type="text/javascript" src="{!! asset('manager/js/select/select2.full.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('manager/js/parsley/parsley.min.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('manager/js/parsley/i18n/pt-br.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('manager/js/select/select2.full.js') !!}"></script>
     <script type="text/javascript" src="{!! asset('manager/js/textarea/autosize.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! asset('manager/js/summernote/summernote.min.js') !!}"></script>
     <script>
         autosize($('.resizable_textarea'));
     </script>
@@ -192,7 +196,6 @@
             });
 
             $('.table').on( 'draw.dt', function () {
-                console.log('draw');
                 bindDelete();
             });
             function bindDelete() {

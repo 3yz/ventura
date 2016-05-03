@@ -103,26 +103,18 @@ class View extends Command
         }
 
         // Form fields and label
-        $formHeadingHtml = '<th>ID</th>';
+        $formHeadingHtml = '<th>ID</th>' . "\n";
         $formBodyHtml = '';
         $formBodyHtmlForShowView = '';
 
         $i = 0;
         foreach ($formFields as $key => $value) {
-            // if ($i == 3) {
-            //     break;
-            // }
-
             $field = $value['name'];
             $label = ucwords(str_replace('_', ' ', $field));
-            $formHeadingHtml .= '<th>' . $label . '</th>';
+            $formHeadingHtml .= "                        <th>$label</th>\n";
 
-            // if ($i == 0) {
-            //     $formBodyHtml .= '<td><a href="{{ url(\'/%%crudName%%\', $item->id) }}">{{ $item->' . $field . ' }}</a></td>';
-            // } else {
-            //     $formBodyHtml .= '<td>{{ $item->' . $field . ' }}</td>';
-            // }
-            $formBodyHtmlForShowView .= '<dt>'.$label.'</dt><dd> {{ $%%crudNameSingular%%->' . $field . ' }} </dd>';
+            $formBodyHtmlForShowView .= '                        <dt>'.$label.'</dt>'. "\n";
+            $formBodyHtmlForShowView .= '                        <dd> {{ $%%crudNameSingular%%->' . $field . ' }} </dd>' . "\n";
 
             $i++;
         }

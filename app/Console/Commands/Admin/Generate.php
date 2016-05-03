@@ -18,7 +18,7 @@ class Generate extends Command
                             {--route=yes : Include Crud route to routes.php? yes|no.}
                             {--pk=id : The name of the primary key.}
                             {--view-path=admin : The name of the view path.}
-                            {--namespace=admin : Namespace of the controller.}';
+                            {--namespace=Admin : Namespace of the controller.}';
 
     /**
      * The console command description.
@@ -73,8 +73,8 @@ class Generate extends Command
 
             $requiredFields = ($requiredFieldsStr != '') ? "[" . $requiredFieldsStr . "]" : '';
 
-            $this->call('admin:controller', ['name' => $controllerNamespace . str_plural($name) , '--crud-name' => $name, '--view-path' => $viewPath, '--fields' => $commaSeparetedString, '--required-fields' => $requiredFields]);
-            $this->call('admin:model', ['name' => $name, '--fillable' => $fillable, '--table' => str_plural(strtolower($name))]);
+            $this->call('admin:controller', ['name' => $controllerNamespace . ucfirst(str_plural($name)) , '--crud-name' => $name, '--view-path' => $viewPath, '--fields' => $commaSeparetedString, '--required-fields' => $requiredFields]);
+            $this->call('admin:model', ['name' => ucfirst($name), '--fillable' => $fillable, '--table' => str_plural(strtolower($name))]);
             $this->call('admin:migration', ['name' => str_plural(strtolower($name)), '--schema' => $fields, '--pk' => $primaryKey]);
             $this->call('admin:view', ['name' => $name, '--fields' => $fields, '--view-path' => $viewPath]);
         } else {
@@ -87,7 +87,7 @@ class Generate extends Command
         if (file_exists($routeFile) && (strtolower($this->option('route')) === 'yes')) {
             $controller = 'admin/' . str_plural(strtolower($name));
 
-            $isAdded = File::append($routeFile, "\nRoute::resource('" . $controller . "', '" . str_plural($name) . "');");
+            $isAdded = File::append($routeFile, "\nRoute::resource('" . $controller . "', '" . ucfirst(str_plural($name)) . "');");
             if ($isAdded) {
                 $this->info('Crud/Resource route added to ' . $routeFile);
             } else {
