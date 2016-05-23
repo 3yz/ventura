@@ -14,9 +14,9 @@ elixir(function(mix) {
     mix.scripts([
         "vendor/jquery.js",
         "plugins.js",
-        "all.js"
+        "app.js"
     ], 'public/js/all.js')
-    .scripts(['checklist.js', 'threads.js'], 'public/js/checklist.js')
+    .scripts(['checklist.js'], 'public/js/checklist.js')
     .sass('app.scss')
     .version(['css/app.css', 'js/all.js'])
     .browserSync({proxy: 'localhost:8000'});
