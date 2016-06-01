@@ -20,7 +20,7 @@
         <meta property="og:image" content="" />
         <!-- facebook meta -->
 
-        <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
+        <link rel="stylesheet" href="{{ URL::to('/') . elixir('css/app.css') }}">
 
         <link href="http://fonts.googleapis.com/css?family=Ubuntu:300,400,700|Raleway:200" rel="stylesheet" type="text/css">
     </head>
@@ -37,12 +37,7 @@
 
         @yield('content')
 
-        {!! Html::script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') !!}
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="{{ elixir('js/all.js') }}"></script>
-        @if (!App::environment('production'))
-        {!! Html::script('js/checklist.js') !!}
-        @endif
+        <script src="{{ URL::to('/') . elixir('js/all.js') }}"></script>
 
         <script>
             //colocar aqui o ID do analytics
