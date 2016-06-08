@@ -38,3 +38,4 @@ UTIL = {
     UTIL.exec( controller, action );
   }
 };
+$( document ).ready( UTIL.init );
